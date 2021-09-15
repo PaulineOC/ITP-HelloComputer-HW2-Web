@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Perfect Stranger</title>
+		<link rel="stylesheet" href="./main.css">
+	</head>
+
+	<body class="customfont">
+		<div class="intro">
+			<h1 id="title">Perfect Stranger</h1>
+			<p id="instructions">
+				Perfect Stranger is a bot that will try to guess what you look like. 
+				It will ask you 4 questions that you need to verbally respond to. 
+				Sorry in advance if it doesn't get it right in the first, second, or third try - it is trying its best.
+			</p>
+			<div id="limit-section">
+					<p id="current-date">Current Date: </p>
+					<p id="games-remaining">Sessions Remaining: </p>
+
+
+					<div id="auth-section">
+						<label for="password">Enter password: </label>
+						<input 
+							type="password"
+							id="password-text"
+							></input>
+						<input type="button"
+							type="button" 
+							id="submit-password" 
+							name="submit-password" 
+							value="Submit"
+							></input>
+
+						<div class="start-button">
+							<label  for="start-button">Press here to begin:</label>
+							<input 
+								type="button" 
+								id="start-button" 
+								name="start-button" 
+								disabled
+								value="START">
+							</input>
+						</div>
+					</div>
+			</div>
+		</div>
+
+		<div class="quiz-container">
+
+			<div class="dialog">
+				<div id="question"></div>
+				<div id="response"></div>
+				<button id="questionbutton2" class="hidden">Proceed to second question</button>
+				<button id="questionbutton3" class="hidden">Proceed to third question</button>
+				<button id="questionbutton4" class="hidden">Proceed to fourth question</button>
+			</div>
+
+			<div class="result">
+				<div id="loading" class="hidden">
+					<p>The bot is analyzing who you are...</p>
+				</div>
+				<img src="https://images.generated.photos/G3AjU6VgN-aHvqA7tN0U8-FjGgL37gBRSRFN_k6sM3g/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/OTUwMzgyLmpwZw.jpg" id ="final-pic" c></img>
+			</div>
+
+		</div>
+		
+
+		<!-- Scripts -->
+		<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+		<script type="text/javascript" src="./parameters.js"></script>
+		<script type="text/javascript" src="./init.js"></script>
+		<script type="text/javascript" src="./main.js"></script>
+		<script type="text/javascript" src="./request.js"></script>
+	</body>
+</html>

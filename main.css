@@ -1,0 +1,57 @@
+body{
+	background-color: black;
+	color: #39FF14;
+
+}
+
+
+@font-face {
+    font-family: "HackerFont";
+    src: url('./ANDALEMO.TTF') format("truetype");
+}
+
+.customfont { 
+    font-family: "HackerFont", Verdana, Tahoma;
+}
+
+.intro{
+	display: block;
+	justify-content: center ;
+}
+
+#title{
+	text-align: center;
+}
+
+#instructions {
+	margin-right: auto;
+	margin-left: auto;
+	width: 75%;
+}
+
+#limit-section{
+	margin-right: auto;
+	margin-left: auto;
+	width: 75%;
+}
+
+#auth-section{
+	margin-top: 1rem;
+	font-size: 1.25rem;
+}
+
+#current-date, #games-played, #games-remaining{
+	font-size: 1rem;
+	font-weight: bold;
+	margin: 0px 0px 0px 0px;
+}
+
+
+.hidden {
+	display: none;
+}
+
+.response-text{
+	
+}
+
