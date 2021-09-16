@@ -30,7 +30,7 @@ const getPicture = () => {
         }
     }).then(response => response.json()).then((result)=>{
 
-    	const filteredEthnicity = esult.faces.filter((currFace)=>{
+    	const filteredEthnicity = result.faces.filter((currFace)=>{
     		const ethnicity = currFace.meta.ethnicity[0];
     		return ethnicity.toLowerCase() === sessionAnswers.ethnicity;
     	});
