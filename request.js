@@ -1,14 +1,4 @@
 const getPicture = () => {
-	console.log("in get picture");
-
-	// For testing: 
-	sessionAnswers = {
-		"name": "Test",
-		"model": "1",
-		"hair-length": "medium",
-		"eye-color": "brown",
-		"confidence": 0.1,
-	};
 
 	const api_key=`qQ7BFMyAq2s5sb3PDfGVAQ`;
 
@@ -20,8 +10,14 @@ const getPicture = () => {
 		url+= `?ethnicity=${sessionAnswers.ethnicity}`;
 	}
 	//Add eye-color, hair-color, confidence queries
-	url+=`?eye_color=${sessionAnswers["eye-color"]}?hair_color=${sessionAnswers["hair-color"]}?confidence=${sessionAnswers.confidence}`;
-
+	url+=`?eye_color=${sessionAnswers["eye-color"]}?hair_color=${sessionAnswers["hair-color"]}?confidence=${1}`;
+	
+	if(sessionAnswers.age){
+		url+=`?age=${sessionAnswers.age}`;
+	}
+    if(sessionAnswers.gender){
+        url+=`?gender=${sessionAnswers.gender}`;
+    }
 
 	console.log(url);
 
@@ -34,20 +30,57 @@ const getPicture = () => {
         }
     }).then(response => response.json()).then((result)=>{
 
-    	const firstFace = result.faces[0];
-    	console.log(firstFace);
+    	const filteredEthnicity = esult.faces.filter((currFace)=>{
+    		const ethnicity = currFace.meta.ethnicity[0];
+    		return ethnicity.toLowerCase() === sessionAnswers.ethnicity;
+    	});
+    	console.log(filteredEthnicity);
+    	const randomIdx = Math.floor(Math.random() * filteredEthnicity.length);
+    	console.log(randomIdx);
     	
-    	const firstFaceURL = firstFace["urls"][4]["512"];
+    	const faceURL = filteredEthnicity[randomIdx]["urls"][4]["512"];
 
-    	const finalPic = document.getElementById("final-pic")
-    	finalPic.src = firstFaceURL;
+    	const finalPic = document.getElementById("final-pic");
+        console.log('final URL:', finalPic);
+    	finalPic.src = faceURL;
     	finalPic.classList.toggle("hidden");
 
 		document.getElementById("loading").textContent = `${sessionAnswers.name}, the bot determines you look like this: `;
-
     })
     .catch(error => {
     	console.log('Error in fetch: ');
     	console.log(error);
     });
 };
+
+
+const getGender = (name, cb) => {
+	const API_KEY =`SAopJyCjDA25cA2gYVbDUq8uLNZXwmpDN5Kf`;
+	const nameURL = `https://gender-api.com/get?name=${name}&key=${API_KEY}`;
+
+    fetch(nameURL, {
+        method: 'GET',
+        mode: 'cors',
+    }).then(response => response.json()).then((result)=>{
+        console.log(result);
+
+        const gender = result.gender;
+
+        if(gender.includes(SEX.FEMALE)){
+            saveFinalAnswer("gender",SEX.FEMALE);
+
+        }
+        else if(gender.includes(SEX.MALE)){
+            saveFinalAnswer("gender",SEX.MALE);
+        }
+        else{
+            saveFinalAnswer("gender",null);
+        }
+        cb(gender);
+    })
+    .catch(error => {
+        console.log('Error in fetch: ');
+        console.log(error);
+    });
+
+}

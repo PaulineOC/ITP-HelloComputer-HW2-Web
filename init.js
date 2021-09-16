@@ -1,11 +1,5 @@
 	
 const init = () => {
-	/*
-		TO DO: 
-	- Set date text
-	- GET request to backend to see how many games are currently played
-	- Set games remaining text 
-	*/
 
 	// Set Current Date:
 	const currDate = dayjs().format('MMMM D, YYYY');
@@ -26,7 +20,6 @@ document.getElementById("submit-password").onclick = () => {
 	}
 	//For testing: 
 	//startButton.disabled = false;
-
 };
 
 startButton.onclick = () => {

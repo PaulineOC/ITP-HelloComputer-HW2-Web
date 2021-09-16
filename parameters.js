@@ -24,7 +24,10 @@ const AGE = Object.freeze({
 	"INFANT": "infant",
 	"CHILD": "child",
 	"YOUNG-ADULT": "young-adult",
+	"ADULT": "adult",
 	"ELDERLY": "elderly",
+	"OMIT": "omit",
+	"GUESS": "guess"
 });
 
 const EMOTION = Object.freeze({
@@ -77,13 +80,13 @@ const QUESTIONS =  {
 
 	"0": {
 		"question-verbal": "What is your name?",
-		"question-text": "What is your name?",
+		"question-text": ">What is your name?",
 		"answer-text": "Hello, "
 	},
 	"1": {
 		"question-verbal": "What ethnicity do you identify as? You can say: 'White', 'Latino', 'Asian', 'Black', 'I omit my answer', or 'I would rather you guess'",
 		"question-text": (`
-			<p>What ethnicity do you identify as? You can say:<p>
+			<p>>What ethnicity do you identify as? You can say:<p>
 			<ul>
 				<li>White</li>
 				<li>Latino</li>
@@ -101,13 +104,17 @@ const QUESTIONS =  {
 		"answer-text": "",
 	},
 	"3": {
-		"question-verbal": "How much do you trust this bot's perception of you? You can say: 'Very!', 'Somewhat', 'Not at all' ",
+		"question-verbal": "What age group are you in? You can say: 'Infant', 'Child', 'Young Adult', 'Adult', 'Elderly', 'I omit my answer', or 'I would rather you guess' ",
 		"question-text": (`
-			<p>How much do you trust this bot's perception of you? You can say:<p>
+			<p>>What age group are you in? You can say: <p>
 			<ul>
-				<li>Very</li>
-				<li>Somewhat</li>
-				<li>Not at all</li>
+				<li>Infant</li>
+				<li>Child</li>
+				<li>Young adult</li>
+				<li>Adult</li>
+				<li>Elderly</li>
+				<li>I omit my answer</li>
+				<li>I would rather you guess</li>
 			</ul>
 		`),
 		"answer-text": "",

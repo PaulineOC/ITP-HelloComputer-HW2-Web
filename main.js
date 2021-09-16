@@ -6,6 +6,7 @@ let sessionAnswers = {
 	'model': null,
 	'hair-length': null,
 	'name': null,
+	'gender': null,
 	'age': null, 
 	'emotion': null,
 	'ethnicity': null,
@@ -126,24 +127,38 @@ buttonForLastQuestion.onclick = () => {
 
 		console.log('here is q4 answer: ', answer);
 
-		if(answer.includes(CONFIDENCE.VERY)){
-			saveFinalAnswer("confidence", 0.9);
+		if(answer.includes(AGE.INFANT)){
+			saveFinalAnswer("age", AGE.INFANT);
 		}
-		else if(answer.includes(CONFIDENCE.SOMEWHAT)){
-			saveFinalAnswer("confidence", 0.5);
+		else if(answer.includes(AGE.CHILD)){
+			saveFinalAnswer("age", AGE.CHILD);
 		}
-		else if(answer.includes(CONFIDENCE.NOTATALL)){
-			saveFinalAnswer("confidence", 0.1);
+		else if(answer.includes(AGE["YOUNG-ADULT"])){
+			saveFinalAnswer("age", AGE["YOUNG-ADULT"]);
+		}
+		else if(answer.includes(AGE.ADULT)){
+			saveFinalAnswer("age", AGE.ADULT);
+		}
+		else if(answer.includes(AGE.ELDERLY)){
+			saveFinalAnswer("age", AGE.ELDERLY);
+		}
+		else if(answer.includes(AGE.OMIT)){
+			saveFinalAnswer("age", null);
 		}
 		else{
-			const randomConfidence = Math.random();
-			console.log('random confidence: ',randomConfidence );
-			saveFinalAnswer("confidence", randomConfidence);
-		}
-		console.log(sessionAnswers);
+			//Guessing or unintelligble answer
+			// take out omit and guess
+			const keys = Object.keys(AGE).slice(0, 5);
+			console.log(keys);
+			const randomInd = Math.floor(Math.random() * keys.length);
+			const randomItem = keys[randomInd];
+			saveFinalAnswer("age", AGE[`${randomItem}`]);
+		}	
 		return (`<p class="response"> You said: "${input}"</p>
 		`);
 	};
+
+
 	askQuestionReceiveAnswer(questionVerbal, questionText, handleAnswer);
 	buttonForLastQuestion.classList.toggle("hidden");
 
@@ -171,12 +186,18 @@ const askQuestionReceiveAnswer = (question, questionText, handleAnswer) => {
 		listener.onresult = () => {
 			const answer = event.results[0][0].transcript;
 
+			console.log(currentQuestion);
+
 			//Show New Response
 			responseEle.innerHTML = handleAnswer(answer);
 
 			currentQuestion++;
+
+
+			console.log('right before callback');
+
 			//Show button for next question
-			if(currentQuestion<=3){
+			if(currentQuestion<=3  && currentQuestion>0){
 				document.getElementById(`questionbutton${currentQuestion+1}`).classList.toggle("hidden");
 			}
 			console.log('curr question: ', currentQuestion);
@@ -217,10 +238,12 @@ const handleSeasonParam = () => {
 	}
 };
 
-
 const startQuiz = () => {
+	startButton.disabled = true;
+
 	handleModelParam();
 	handleSeasonParam();
+
 
 	//Q1: What is your name? 
 	const questionVerbal = QUESTIONS[`${currentQuestion}`]["question-verbal"];
@@ -228,17 +251,25 @@ const startQuiz = () => {
 	const answerText = QUESTIONS[`${currentQuestion}`]["answer-text"];
 
 	const handleAnswer = (name) => {
-		saveFinalAnswer("name", name);
+
+		// make a fetch request here
+		getGender(name.toLowerCase(), () => {
+			saveFinalAnswer("name", name);
+			document.getElementById(`questionbutton${currentQuestion+1}`).classList.remove("hidden");
+		});
 		return `Hello, ${name}`;
 	};
 
-	//askQuestionReceiveAnswer(questionVerbal, questionText, handleAnswer);
+	askQuestionReceiveAnswer(questionVerbal, questionText, handleAnswer);
 };
 
 const endQuiz = () => {
 	//Add Loading
 	document.getElementById("loading").classList.toggle("hidden");
-	getPicture();
-	//make fetch request
-}
+	document.getElementById("question").classList.add("hidden");
+	document.getElementById("response").classList.add("hidden");
 
+	console.log("answers to submit:");
+	console.log(sessionAnswers);
+	getPicture();
+}

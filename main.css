@@ -1,9 +1,7 @@
 body{
 	background-color: black;
 	color: #39FF14;
-
 }
-
 
 @font-face {
     font-family: "HackerFont";
@@ -14,9 +12,10 @@ body{
     font-family: "HackerFont", Verdana, Tahoma;
 }
 
-.intro{
+#intro{
 	display: block;
-	justify-content: center ;
+	justify-content: center;
+	padding-bottom: 2rem;
 }
 
 #title{
@@ -46,12 +45,40 @@ body{
 	margin: 0px 0px 0px 0px;
 }
 
+#quiz-container{
+	width: 75%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	font-size: 1.25rem;
+	color: cyan;
+}
+
+#question {
+	padding-bottom: 0.5rem;
+}
+
+
+#response {
+	padding-bottom: .75rem;
+	font-style: italic;
+}
+
+#questionbutton2, #questionbutton3, #questionbutton4{
+	font-size: 1.25rem;
+}
+
+#loading{
+	padding-bottom: 1rem;s
+}
+
+#final-pic{
+	margin-left: auto;
+	margin-right: auto;
+}
 
 .hidden {
 	display: none;
 }
 
-.response-text{
-	
-}
 
