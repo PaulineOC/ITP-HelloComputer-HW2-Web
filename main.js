@@ -158,7 +158,6 @@ buttonForLastQuestion.onclick = () => {
 		`);
 	};
 
-
 	askQuestionReceiveAnswer(questionVerbal, questionText, handleAnswer);
 	buttonForLastQuestion.classList.toggle("hidden");
 
@@ -177,7 +176,6 @@ const askQuestionReceiveAnswer = (question, questionText, handleAnswer) => {
 	speaker.speak(questionToAsk);
 	const questionEle = document.getElementById("question");
 	questionEle.innerHTML = questionText;
-
 
 	questionToAsk.onend = () => {
 
@@ -243,7 +241,6 @@ const startQuiz = () => {
 
 	handleModelParam();
 	handleSeasonParam();
-
 
 	//Q1: What is your name? 
 	const questionVerbal = QUESTIONS[`${currentQuestion}`]["question-verbal"];
