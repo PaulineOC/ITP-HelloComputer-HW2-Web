@@ -30,27 +30,36 @@ const getPicture = () => {
         }
     }).then(response => response.json()).then((result)=>{
 
-        console.log('original arry:', result.faces.length);
-
+        //console.log('original arry:', result.faces.length);
 
         const guessedGender = result.faces.filter((currFace)=>{
             const gender = currFace.meta.gender[0];
             return gender.toLowerCase() === sessionAnswers.gender;
         });
 
-        console.log('here is gender filtered array:');
-        console.log(guessedGender);
+        //console.log('here is gender filtered array:');
+        //console.log(guessedGender);
 
-    	const filtered = guessedGender.filter((currFace)=>{
+    	const filteredEthnicity = guessedGender.filter((currFace)=>{
             const ethnicity = currFace.meta.ethnicity[0];
             return ethnicity.toLowerCase() === sessionAnswers.ethnicity;
         });
-        console.log('here is ethnicity filtered array');
-    	console.log(filtered);
-    	const randomIdx = Math.floor(Math.random() * filtered.length);
-    	console.log('random item chosen: ',randomIdx);
+
+        //console.log('here is ethnicity filtered array');
+        //console.log(filteredEthnicity);
+
+        const filteredAge = guessedGender.filter((currFace)=>{
+            const age = currFace.meta.age[0];
+            return age.toLowerCase() === sessionAnswers.age;
+        });
+
+        console.log('here is age filtered array');
+        console.log(filteredAge);
+
+    	const randomIdx = Math.floor(Math.random() * filteredAge.length);
+    	//console.log('random item chosen: ',randomIdx);
     	
-    	const faceURL = filtered[randomIdx]["urls"][4]["512"];
+    	const faceURL = filteredAge[randomIdx]["urls"][4]["512"];
 
     	const finalPic = document.getElementById("final-pic");
         console.log('final URL:', finalPic);
