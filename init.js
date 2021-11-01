@@ -3,10 +3,10 @@ const init = () => {
 
 	// Set Current Date:
 	const currDate = dayjs().format('MMMM D, YYYY');
-	const currDateEle = document.getElementById("current-date").textContent = `Current Date: ${currDate}`;
+	//const currDateEle = document.getElementById("current-date").textContent = `Current Date: ${currDate}`;
 
 	let currGamesPlayed = 10;
-	document.getElementById("games-remaining").textContent = `Sessions Remaining: ${MONTHLY_LIMIT-currGamesPlayed}`;
+	//document.getElementById("games-remaining").textContent = `Sessions Remaining: ${MONTHLY_LIMIT-currGamesPlayed}`;
 };
 
 const startButton = document.getElementById("start-button");
